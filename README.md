@@ -16,7 +16,7 @@ A Reverse Shell cheat sheet that get you a one-liner based on the port defined.
  Usage 
   -  
  >>
-        ./verso <PORT>
+    ./verso <PORT>
 >  Where PORT is any TCP PORT user can specify.
 * * * 
 > ## Reference 
